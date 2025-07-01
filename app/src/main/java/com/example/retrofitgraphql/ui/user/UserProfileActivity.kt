@@ -25,7 +25,7 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun requestGetProfile() {
-        viewModel.getUserProfile()
+        viewModel.getUserProfile(this)
     }
 
     private fun handleResponse() {

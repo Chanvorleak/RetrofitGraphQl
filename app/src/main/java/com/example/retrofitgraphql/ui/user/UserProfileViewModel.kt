@@ -18,20 +18,19 @@ class UserProfileViewModel : ViewModel() {
     private val _userProfile = MutableLiveData<UserProfile>()
     val userProfile: LiveData<UserProfile> = _userProfile
 
-    fun getUserProfile() {
-        val strQuery = "query {\n" +
-                "  getProfile {\n" +
-                "      id,\n" +
-                "      fullName,\n" +
-                "      phoneNumber,\n" +
-                "      username,\n" +
-                "  }\n" +
-                "}"
-
+    fun getUserProfile(context: android.content.Context) {
+        val strQuery = " query {\n" +
+                "              getProfile {\n" +
+                "                id,\n" +
+                "                fullName,\n" +
+                "                phoneNumber,\n" +
+                "                username\n" +
+                "              }\n" +
+                "            }"
 
         val request = UserGraphQLRequest(strQuery)
 
-        RetrofitClient.api.fetchUserProfile(request)
+        RetrofitClient.getApi(context).fetchUserProfile(request)
             .enqueue(object : Callback<UserGraphQLResponse<UserProfileResponse>> {
                 override fun onResponse(
                     call: Call<UserGraphQLResponse<UserProfileResponse>>,

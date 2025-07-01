@@ -16,22 +16,19 @@ class TagProductionViewModel : ViewModel() {
     private val _tagProduction = MutableLiveData<List<TagProduction>>()
     val tagProduction: LiveData<List<TagProduction>> = _tagProduction
 
-    fun getProductionTag() {
-        val strQuery = """
-        query {
-        getProductTags {
-        results {
-          id
-          tagName
-                 }
-                     }
-                }
-        """.trimIndent()
-
+    fun getProductionTag(context: android.content.Context) {
+        val strQuery = "query {\n" +
+                "        getProductTags {\n" +
+                "        results {\n" +
+                "          id\n" +
+                "          tagName\n" +
+                "                 }\n" +
+                "                     }\n" +
+                "                }"
 
         val request = TagGraphQLRequest(strQuery)
 
-        RetrofitClient.api.fetchProductionTag(request)
+        RetrofitClient.getApi(context).fetchProductionTag(request)
             .enqueue(object : Callback<TagGraphQLResponse<TagProductionResponse>> {
                 override fun onResponse(
                     call: Call<TagGraphQLResponse<TagProductionResponse>>,

@@ -1,33 +1,53 @@
 package com.example.retrofitgraphql.api
-import okhttp3.Interceptor
+
+import android.content.Context
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 object RetrofitClient {
 
     private const val BASE_URL = "https://api-dev.jalatlogistics.com/service-user/"
+    private var retrofit: Retrofit? = null
 
-    private const val AUTH_TOKEN =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiNzhhMzE2LWEyZmUtNDc3YS1hOTYwLTIxOWUwNGJhNzczOCIsInBob25lTnVtYmVyIjoiKzg1NTg3OTgyODg1IiwiZnVsbE5hbWUiOiJTaW0gTWVuZ2h1eS1SUy5QTCIsInVzZXJUeXBlIjoiRFJJVkVSIiwic3RhdHVzIjoiQUNUSVZFIiwicm9sZUlkIjpudWxsLCJsb2dpbkRhdGUiOiIyMDI1LTA2LTI1VDA3OjUzOjQyLjg1MloifQ.LofNAiV0-YIYvyoxQqFaq0Lfl6coMZtTm1xVe1jJLm4"
-
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(Interceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("x-platform", "android")
-                .addHeader("x-udid", "123")
-                .addHeader("Authorization", AUTH_TOKEN)
+    fun getApi(context: Context): GraphQLApiService {
+        if (retrofit == null) {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(AuthInterceptor(context))
                 .build()
-            chain.proceed(request)
-        })
-        .build()
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .build()
+            retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build()
+        }
 
-    val api: GraphQLApi = retrofit.create(GraphQLApi::class.java)
+        return retrofit!!.create(GraphQLApiService::class.java)
+    }
 }
+
+//object RetrofitClient {
+//
+//    private const val BASE_URL = "https://api-dev.jalatlogistics.com/service-user/"
+//
+////    private const val AUTH_TOKEN =
+////        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkOGIyOTkwLWUzNGEtNDhiZS04MmVkLTk4OTFmOTRjNDVlNiIsInBob25lTnVtYmVyIjoiKzg1NTk2MzcxOTQ3NyIsImZ1bGxOYW1lIjoiZ2xpbW1lciIsInVzZXJUeXBlIjoiTk9OX1BBUlRORVIiLCJzdGF0dXMiOiJBQ1RJVkUiLCJyb2xlSWQiOm51bGwsImxvZ2luRGF0ZSI6IjIwMjUtMDYtMzBUMDI6NTM6NTcuOTA5WiJ9.muVm9ZAGBRuOrK-fw91Ro99dQwR8xqTLGi5TE70ek3Q"
+//
+//    private val okHttpClient= OkHttpClient.Builder()
+//        .addInterceptor(AuthInterceptor(context))
+////        .addInterceptor(Interceptor { chain ->
+////            val request = chain.request().newBuilder()
+////                .addHeader("Content-Type", "application/json")
+////                .addHeader("x-platform", "android")
+////                .addHeader("x-udid", "123")
+////                .addHeader("Authorization", "Bearer ${UserSession.token()}")
+//        .build()
+//
+//private val retrofit = Retrofit.Builder()
+//    .baseUrl(BASE_URL)
+//    .addConverterFactory(GsonConverterFactory.create())
+//    .client(okHttpClient)
+//    .build()
+//
+//val api: GraphQLApiService = retrofit.create(GraphQLApiService::class.java)
+//}

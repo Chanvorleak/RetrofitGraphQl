@@ -9,7 +9,6 @@ data class UserGraphQLResponse<T>(
     val data: T?
 )
 
-
 data class UserProfileResponse(
     val getProfile: UserProfile
 )

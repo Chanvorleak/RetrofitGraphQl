@@ -6,26 +6,49 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGetUser"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#397E3C"
-        android:text="@string/get_user"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:layout_margin="20sp"
+        android:orientation="horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGetProductionName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#397E3C"
-        android:text="get NameTag"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGetUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:backgroundTint="#397E3C"
+            android:text="@string/get_user"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGetProductionName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:backgroundTint="#397E3C"
+            android:text="get NameTag"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btnLogout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:backgroundTint="#397E3C"-->
+<!--        android:text="Log out"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textStyle="bold" />-->
 
 </LinearLayout>

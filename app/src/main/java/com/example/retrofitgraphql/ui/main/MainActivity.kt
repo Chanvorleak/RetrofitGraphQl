@@ -1,4 +1,4 @@
-package com.example.retrofitgraphql.ui
+package com.example.retrofitgraphql.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.example.retrofitgraphql.ui.user.UserProfileActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -24,5 +24,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TagProductionActivity::class.java)
             startActivity(intent)
         }
+//        binding.btnLogout.setOnClickListener {
+//            viewModel.logout(this)
+//        }
+
+
     }
+
 }

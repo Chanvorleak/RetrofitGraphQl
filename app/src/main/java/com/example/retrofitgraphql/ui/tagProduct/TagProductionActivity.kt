@@ -22,7 +22,7 @@ private lateinit var viewModel: TagProductionViewModel
     }
 
     private fun requestProductionTag(){
-        viewModel.getProductionTag()
+        viewModel.getProductionTag(this)
     }
 
     private fun handleResponse(){
