@@ -1,12 +1,8 @@
 package com.example.retrofitgraphql.model
 
 
-data class UserGraphQLRequest(
-    val query: String
-)
-
-data class UserGraphQLResponse<T>(
-    val data: T?
+data class UserGraphQLResponse(
+    val data: UserProfileResponse
 )
 
 data class UserProfileResponse(

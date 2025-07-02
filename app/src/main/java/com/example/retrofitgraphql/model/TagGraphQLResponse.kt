@@ -1,11 +1,8 @@
 package com.example.retrofitgraphql.model
 
-data class TagGraphQLRequest(
-    val query: String
-)
 
-data class TagGraphQLResponse<T>(
-    val data: T?
+data class TagGraphQLResponse(
+    val data:TagProductionResponse
 )
 
 data class TagProductionResponse(
